@@ -12,7 +12,6 @@ using ASAPTASK.Core.Interfaces.AreaInterface;
 namespace ASAPTASK.API.Areas.API.Controllers.AreaControllers
 {
     [Route("API/[controller]/[action]")]
-    [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]
     public class RegionController : ControllerBase
     {

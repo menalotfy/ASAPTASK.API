@@ -14,7 +14,6 @@ namespace ASAPTASK.API.Areas.API.Controllers.AreaControllers
 
     [Route("API/[controller]/[action]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = "Bearer")]
     public class CityController : ControllerBase
     {
         private readonly ICityRepository _dbContext;

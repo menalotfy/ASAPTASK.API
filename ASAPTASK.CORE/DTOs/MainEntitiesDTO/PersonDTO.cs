@@ -13,12 +13,14 @@ namespace ASAPTASK.CORE.DTOs.MainEntitiesDTO
         public string NameAR { get; set; }
         public string Name { get; set; }
 
-        public string FamilyName { get; set; }
-        public string ProfileImagePath { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
 
 
+        public int CountryID { get; set; }
+        public int RegionID { get; set; }
+
+        public int? CityID { get; set; }
 
         public int? AddressID { get; set; }
         public AddressDTO Address { get; set; }

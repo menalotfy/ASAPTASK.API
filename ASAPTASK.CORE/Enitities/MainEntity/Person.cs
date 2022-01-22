@@ -10,8 +10,6 @@ namespace ASAPTASK.Core.Enitities.MainEntity
     {
         public string NameEN { get; set; }
         public string NameAR { get; set; }
-        public string FamilyName { get; set; }
-        public string ProfileImagePath { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
 

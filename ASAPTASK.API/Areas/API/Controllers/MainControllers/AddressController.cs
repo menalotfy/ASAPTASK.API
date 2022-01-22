@@ -27,19 +27,18 @@ namespace ASAPTASK.API.Areas.API.Controllers.MainControllers
         }
         [HttpGet]
         [AllowAnonymous]
-        [ResponseCache(Duration = 5000)]
         public IActionResult GetAllAddresss([FromHeader] string language = "en")
         {
-            List<Address> Addresss = _dbContext.GetAll().ToList();
+            List<Address> Addresss = _dbContext.getAllAddress().ToList();
 
-            return Ok(ResponseHelper.Success(data: _dbContext.SetObjectWithLanguage(Addresss, language), language: language));
+            return Ok(ResponseHelper.Success(data:_dbContext.SetAddressDTO( _dbContext.SetObjectWithLanguage(Addresss, language)), language: language));
         }
 
         [HttpGet]
         [AllowAnonymous]
         public ActionResult<Address> GetAddress(int ID, [FromHeader] string language = "en")
         {
-            var Address = _dbContext.GetById(ID);
+            var Address = _dbContext.getAddressByID(ID);
 
             if (Address == null)
             {
@@ -47,7 +46,7 @@ namespace ASAPTASK.API.Areas.API.Controllers.MainControllers
               , language: language));
             }
 
-            return Ok(ResponseHelper.Success(data: _dbContext.SetObjectWithLanguage(Address, language), language: language));
+            return Ok(ResponseHelper.Success(data:_dbContext.SetAddressDTO( _dbContext.SetObjectWithLanguage(Address, language)), language: language));
         }
 
         // PUT: api/Address/5

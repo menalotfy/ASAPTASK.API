@@ -11,6 +11,7 @@ using ASAPTASK.CORE.DTOs.MainEntitiesDTO;
 using ASAPTASK.Infrastructure.Data;
 using ASAPTASK.Infrastructure.Repositories.AreaRepositories;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace ASAPTASK.Infrastructure.Repositories.MainRepositories
 {
@@ -51,7 +52,14 @@ namespace ASAPTASK.Infrastructure.Repositories.MainRepositories
         return obj;
     }
 
-
+        public List<Address> getAllAddress()
+        {
+            return _dbContext.Addresses.Where(x => x.IsDeleted != true).Include(x => x.City).ThenInclude(y => y.Region.Country).ToList();
+        }    
+        public Address getAddressByID(int ID)
+        {
+            return _dbContext.Addresses.Where(x => x.IsDeleted != true && x.ID==ID).Include(x => x.City).ThenInclude(y => y.Region.Country).FirstOrDefault();
+        }
     public object SetAddressDTO(object obj)
     {
         if (obj != null)
@@ -81,6 +89,12 @@ namespace ASAPTASK.Infrastructure.Repositories.MainRepositories
         if (Address.City != null)
         {
             AddressDTO.City = (CityDTO)new CityRepository(_dbContext, _mapper).SetCityDTO(Address.City);
+                if (Address.City.Region != null)
+                {
+                    AddressDTO.RegionID = Address.City.Region.ID;
+                    if (Address.City.Region.Country != null)
+                        AddressDTO.CountryID= Address.City.Region.Country.ID;
+                }
         }
 
 

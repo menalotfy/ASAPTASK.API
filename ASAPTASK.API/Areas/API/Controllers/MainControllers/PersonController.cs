@@ -30,9 +30,9 @@ namespace ASAPTASK.API.Areas.API.Controllers.MainControllers
         [ResponseCache(Duration = 5000)]
         public IActionResult GetAllPersons([FromHeader] string language = "en")
         {
-            List<Person> Persons = _dbContext.GetAll().OrderBy(x => x.NameEN).ToList();
+            List<Person> Persons = _dbContext.GetPersons().OrderBy(x => x.NameEN).ToList();
 
-            return Ok(ResponseHelper.Success(data: _dbContext.SetObjectWithLanguage(Persons, language), language: language));
+            return Ok(ResponseHelper.Success(data:_dbContext.SetPersonDTO( _dbContext.SetObjectWithLanguage(Persons, language)), language: language));
         }
 
         [HttpGet]
@@ -62,7 +62,6 @@ namespace ASAPTASK.API.Areas.API.Controllers.MainControllers
                 Person.Email = PersonDto.Email;
                 Person.AddressID = PersonDto.AddressID;
                 Person.Phone = PersonDto.Phone;
-                Person.ProfileImagePath = PersonDto.ProfileImagePath;
                 _dbContext.Update(Person);
             }
             catch (Exception ex)
@@ -93,7 +92,6 @@ namespace ASAPTASK.API.Areas.API.Controllers.MainControllers
                 Person.Email = PersonDto.Email;
                 Person.AddressID = PersonDto.AddressID;
                 Person.Phone = PersonDto.Phone;
-                Person.ProfileImagePath = PersonDto.ProfileImagePath;
               
                 _dbContext.Add(Person);
 

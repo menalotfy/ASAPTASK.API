@@ -34,17 +34,34 @@ namespace ASAPTASK.Infrastructure.Data
 
             if (!context.Countries.Any())
             {
-                context.AddRange(
+                context.Countries.AddRange(
                     new Country() { NameEN = "Egypt", NameAR= "مصر",DailCode="02",ImagePath="", CreatedDate = DateTime.Now, IsDeleted = false },
                     new Country (){ NameEN = "lebanon", NameAR= "لبنان",DailCode="05",ImagePath="", CreatedDate = DateTime.Now, IsDeleted = false }
                     );
                 context.SaveChanges();
             }
 
+            if (!context.Regions.Any())
+            {
+                context.Regions.AddRange(
+                    new Region() { NameEN = "Cairo", NameAR = "القاهرة", CountryID = 1, CreatedDate = DateTime.Now, IsDeleted = false },
+                    new Region() { NameEN = "Beirut", NameAR = "بيروت", CountryID = 2, CreatedDate = DateTime.Now, IsDeleted = false }
+                    );
+                context.SaveChanges();
+            }
+            if (!context.Cities.Any())
+            {
+                context.Cities.AddRange(
+                    new City() { NameEN = "zaito", NameAR = "زيتون", RegionID = 1, CreatedDate = DateTime.Now, IsDeleted = false },
+                    new City() { NameEN = "Beirut City", NameAR = "بيروت", RegionID = 2, CreatedDate = DateTime.Now, IsDeleted = false }
+                    );
+                context.SaveChanges();
+            }
 
-            
-        
-            
+
+
+
+
         }
     }
 }
